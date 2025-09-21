@@ -8,45 +8,49 @@ blueprint:
       description: Select the plant type
       selector:
         select:
-        options:
-          - Chili
-          - Citrus
-          - Ficus
+          options:
+            - Chili
+            - Citrus
+            - Ficus
+
     growth_stage:
       name: Growth Stage
       description: Select the growth stage
       selector:
         select:
           options:
-          - Cutting
-          - Dormant
-          - Fruiting
-          - Mature
-          - Seed
-          - Sprout
-          - Young
+            - Cutting
+            - Dormant
+            - Fruiting
+            - Mature
+            - Seed
+            - Sprout
+            - Young
 
     lux_sensor:
       name: Light Intensity Sensor
       selector:
         entity:
           domain: sensor
+
     awc_sensor:
       name: Soil Moisture Sensor (AWC)
       selector:
         entity:
           domain: sensor
+
     temperature_sensor:
       name: Temperature Sensor
       selector:
         entity:
           domain: sensor
+
     humidity_sensor:
       name: Humidity Sensor
       selector:
         entity:
           domain: sensor
-    input:
+
     notify_target:
       name: Notify Target
       description: Select the notification service to use
