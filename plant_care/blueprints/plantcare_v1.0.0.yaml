@@ -75,7 +75,7 @@ trigger:
     at: !input alert_time
 
 action:
-  - service: "{{ !input notify_target }}"
+  - service_template: "{{ !input notify_target }}"
     data:
       message: >
         🚨 Plant alert for {{ !input plant_type }} ({{ !input growth_stage }}):
