@@ -46,7 +46,13 @@ blueprint:
       default: "18:00:00"
       selector:
         time:
-
+    alert:
+      name: Alert Text
+      description: Input text entity that stores the current alert message
+      selector:
+        entity:
+          domain: input_text
+ 
 trigger:
   - platform: time_pattern
     minutes: "/15"
