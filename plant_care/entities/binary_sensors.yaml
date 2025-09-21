@@ -1,0 +1,7 @@
+- platform: template
+  sensors:
+    light_active:
+      friendly_name: "Light Active"
+      value_template: >
+        {{ states('sensor.lux_sensor') | float > 1000 }}
+      device_class: light

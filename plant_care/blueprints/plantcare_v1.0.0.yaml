@@ -1,0 +1,54 @@
+blueprint:
+  name: Intelligent Plant Care Monitor
+  description: v1.0.0 – Configurable alert time + light duration tracking
+  domain: automation
+  input:
+    plant_type:
+      name: Plant Type
+      selector:
+        text:
+    growth_stage:
+      name: Growth Stage
+      selector:
+        text:
+    lux_sensor:
+      name: Light Intensity Sensor
+      selector:
+        entity:
+          domain: sensor
+    awc_sensor:
+      name: Soil Moisture Sensor (AWC)
+      selector:
+        entity:
+          domain: sensor
+    temperature_sensor:
+      name: Temperature Sensor
+      selector:
+        entity:
+          domain: sensor
+    humidity_sensor:
+      name: Humidity Sensor
+      selector:
+        entity:
+          domain: sensor
+    light_duration_sensor:
+      name: Light Duration Last 24h (history_stats)
+      selector:
+        entity:
+          domain: sensor
+    notify_target:
+      name: Notification Target
+      selector:
+        entity:
+          domain: notify
+    alert_time:
+      name: Daily Alert Time (HH:MM:SS)
+      default: "18:00:00"
+      selector:
+        time:
+
+trigger:
+  - platform: time_pattern
+    minutes: "/15"
+  - platform: time
+    at: !input alert

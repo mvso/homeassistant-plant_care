@@ -1,0 +1,28 @@
+title: Plant Care
+views:
+  - title: Overview
+    path: overview
+    icon: mdi:leaf
+    type: panel
+    cards:
+      - type: markdown
+        title: 🌿 Plant Care Summary
+        content: >
+          **Plant:** `{{ states('input_text.plant_type') }}`
+          **Stage:** `{{ states('input_text.growth_stage') }}`
+          **Month:** `{{ now().strftime('%B') }}`
+
+          ---
+          **🌞 Light Intensity:** `{{ states('sensor.lux_sensor') }} lx`
+          **⏱️ Light Duration (24h):** `{{ states('sensor.light_duration_last_24h') }} h`
+          **🌱 Soil Moisture (AWC):** `{{ states('sensor.awc_sensor') }}`
+          **🌡️ Temperature:** `{{ states('sensor.temperature_sensor') }} °C`
+          **💧 Humidity:** `{{ states('sensor.humidity_sensor') }} %`
+
+          ---
+          **🧠 Care Summary:**  
+          `{{ state_attr('sensor.plant_data', 'data')[states('input_text.plant_type')][states('input_text.growth_stage')][now().strftime('%B')].care_summary }}`
+
+          ---
+          **🚨 Alert Status:**  
+          `{{ states('input_text.plant_alert_text') if states('input_text.plant_alert_text') else '✅ All parameters are optimal' }}`

@@ -1,0 +1,6 @@
+plant-dashboard:
+  mode: yaml
+  title: Plant Care
+  icon: mdi:leaf
+  show_in_sidebar: true
+  filename: plant_care/plant_dashboard.yaml

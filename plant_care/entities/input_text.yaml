@@ -1,0 +1,4 @@
+plant_alert_text:
+  name: Plant Alert Text
+  max: 255
+  initial: ""
