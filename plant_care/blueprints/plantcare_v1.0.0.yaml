@@ -57,7 +57,7 @@ blueprint:
     notify_target:
       name: Notify Target
       description: Select the notification service to use
-      default: notify.notify
+      default: notify.mobile_app_martins16pro
       selector:
         text:
 
@@ -74,10 +74,64 @@ trigger:
   - platform: time
     at: !input alert_time
 
-actions:
-  - service: notify.mobile_app_martins16pro
-    metadata: {}
-    data:
-      message: Test
+
+variables:
+  month: "{{ now().strftime('%B') }}"
+  data: "{{ state_attr('sensor.plant_data', 'data') }}"
+  thresholds: "{{ data[plant_type][growth_stage][month] }}"
+  lux: "{{ states(lux_sensor) | float }}"
+  awc: "{{ states(awc_sensor) | float }}"
+  temp: "{{ states(temperature_sensor) | float }}"
+  hum: "{{ states(humidity_sensor) | float }}"
+  light_duration_actual: "{{ states(light_duration_sensor) | float }}"
+  light_duration_expected: "{{ thresholds.light_duration.optimal }}"
+  care_summary: "{{ thresholds.care_summary }}"
+
+  alerts: >
+    {% set issues = [] %}
+    {% if lux < thresholds.lux.min or lux > thresholds.lux.max %}
+      {% set issues = issues + ['⚠️ Light intensity out of range'] %}
+    {% endif %}
+    {% if light_duration_actual < thresholds.light_duration.min %}
+      {% set issues = issues + ['⚠️ Light duration too short'] %}
+    {% elif light_duration_actual > thresholds.light_duration.max %}
+      {% set issues = issues + ['⚠️ Light duration too long'] %}
+    {% endif %}
+    {% if awc < thresholds.awc.min or awc > thresholds.awc.max %}
+      {% set issues = issues + ['⚠️ Soil moisture out of range'] %}
+    {% endif %}
+    {% if temp < thresholds.temperature.min or temp > thresholds.temperature.max %}
+      {% set issues = issues + ['⚠️ Temperature out of range'] %}
+    {% endif %}
+    {% if hum < thresholds.humidity.min or hum > thresholds.humidity.max %}
+      {% set issues = issues + ['⚠️ Humidity out of range'] %}
+    {% endif %}
+    {{ issues }}
+
+condition: []
+
+action:
+  - choose:
+      - conditions: "{{ alerts | length > 0 }}"
+        sequence:
+          - service: input_text.set_value
+            data:
+              entity_id: input_text.plant_alert_text
+              value: "{{ alerts | join(', ') }}"
+          - service: "{{ notify_target }}"
+            data:
+              message: "🚨 Plant Alert: {{ alerts | join(', ') }}"
+      - conditions: "{{ alerts | length == 0 }}"
+        sequence:
+          - service: input_text.set_value
+            data:
+              entity_id: input_text.plant_alert_text
+              value: ""
+          - service: "{{ notify_target }}"
+            data:
+              message: "✅ All plant parameters are within optimal range."
+
+mode: single
+
 
   
