@@ -75,8 +75,16 @@ trigger:
     at: !input alert_time
 
 action:
-  - service: !input notify_target
-    data:
+  - data:
+      title: "Plant care alert"
       message: >
         🚨 Plant alert for {{ !input plant_type }} ({{ !input growth_stage }}):
         {{ states('input_text.plant_alert_text') }}
+
+      data: >
+        {% set url = "homeassistant://navigate/dashboard-jd8/night?server=jd8"
+        %}  {{
+        ios_data if is_ios else android_data }}
+    action: notify.IogM
+
+  
