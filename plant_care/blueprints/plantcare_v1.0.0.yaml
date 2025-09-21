@@ -46,11 +46,14 @@ blueprint:
       selector:
         entity:
           domain: sensor
+    input:
     notify_target:
-      name: Notification Target
+      name: Notify Target
+      description: Select the notification service to use
+      default: notify.notify
       selector:
-        entity:
-          domain: notify
+        text:
+
     alert_time:
       name: Daily Alert Time (HH:MM:SS)
       default: "18:00:00"
