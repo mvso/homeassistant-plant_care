@@ -1,5 +1,5 @@
 blueprint:
-  name: Intelligent Plant Care Monitor
+  name:  Plant Care by mvso
   description: v1.0.0 – Configurable alert time + light duration tracking
   domain: automation
   input:
