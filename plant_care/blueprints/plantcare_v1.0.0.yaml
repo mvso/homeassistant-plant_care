@@ -74,7 +74,10 @@ trigger:
   - platform: time
     at: !input alert_time
 
-action:
-
+actions:
+  - action: notify.mobile_app_martins16pro
+    metadata: {}
+    data:
+      message: Test
 
   
