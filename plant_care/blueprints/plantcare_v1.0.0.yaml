@@ -85,6 +85,6 @@ action:
         {% set url = "homeassistant://navigate/dashboard-jd8/night?server=jd8"
         %}  {{
         ios_data if is_ios else android_data }}
-    action: notify.IogM
+    action: notify.M
 
   
