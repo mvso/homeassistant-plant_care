@@ -4,13 +4,28 @@ blueprint:
   domain: automation
   input:
     plant_type:
-      name: Plant Type
-      selector:
-        text:
-    growth_stage:
-      name: Growth Stage
-      selector:
-        text:
+    name: Plant Type
+    description: Select the plant type
+    selector:
+      select:
+        options:
+        - Chili
+        - Citrus
+        - Ficus
+  growth_stage:
+    name: Growth Stage
+    description: Select the growth stage
+    selector:
+      select:
+        options:
+        - Cutting
+        - Dormant
+        - Fruiting
+        - Mature
+        - Seed
+        - Sprout
+        - Young
+
     lux_sensor:
       name: Light Intensity Sensor
       selector:
@@ -28,11 +43,6 @@ blueprint:
           domain: sensor
     humidity_sensor:
       name: Humidity Sensor
-      selector:
-        entity:
-          domain: sensor
-    light_duration_sensor:
-      name: Light Duration Last 24h (history_stats)
       selector:
         entity:
           domain: sensor
