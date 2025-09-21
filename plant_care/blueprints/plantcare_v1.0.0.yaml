@@ -14,6 +14,7 @@ blueprint:
             - Ficus
             - dummy
             - dummy2
+            - dummy3
 
 
     growth_stage:
