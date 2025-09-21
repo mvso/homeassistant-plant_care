@@ -16,7 +16,6 @@ blueprint:
             - dummy2
             - dummy3
 
-
     growth_stage:
       name: Growth Stage
       description: Select the growth stage
