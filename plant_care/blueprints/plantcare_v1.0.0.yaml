@@ -12,6 +12,9 @@ blueprint:
             - Chili
             - Citrus
             - Ficus
+            - dummy
+            - dummy2
+
 
     growth_stage:
       name: Growth Stage
