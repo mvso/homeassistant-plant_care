@@ -70,3 +70,11 @@ trigger:
     minutes: "/15"
   - platform: time
     at: !input alert_time
+
+action:
+  - service: !input notify_target
+    data:
+      message: >
+        🚨 Plant alert for {{ !input plant_type }} ({{ !input growth_stage }}):
+        {{ states('input_text.plant_alert_text') }}
+
